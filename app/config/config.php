@@ -2,16 +2,15 @@
 /**
  * De database verbindingsgegevens
  */
-define('DB_HOST', '');
-define('DB_NAME', '');
-define('DB_USER', '');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'php-of-jap');
+define('DB_USER', 'root');
 define('DB_PASS', '');
-
 
 /**
  * De naam van de virtualhost
  */
-define('URLROOT', '');
+define('URLROOT', 'http://www.mvc-of-jap.nl');
 
 /**
  * Het pad naar de folder app

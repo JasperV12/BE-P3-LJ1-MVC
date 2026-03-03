@@ -1,20 +1,20 @@
 -- Step: 01
 -- *********************************************************************************
--- Doel : Maak een nieuwe database aan met de naam MVC_Basics_2509AB
+-- Doel : Maak een nieuwe database aan met de naam php-of-jap
 -- *********************************************************************************
 -- Versie       Datum           Auteur              Omschrijving
 -- ******       *****           ******              ************
 -- 01           10-02-2026      VerhoefJ            Smartphones
 -- *********************************************************************************
 
--- Verwijder database MVC_Basics_2509AB
-DROP DATABASE IF EXISTS `MVC_Basics_2509AB`;
+-- Verwijder database
+DROP DATABASE IF EXISTS `php-of-jap`;
 
--- Maak een nieuwe database aan MVC_Basics_2509AB
-CREATE DATABASE `MVC_Basics_2509AB`;
+-- Maak een nieuwe database aan
+CREATE DATABASE `php-of-jap`;
 
--- Gebruik database MVC_Basics_2509AB
-USE `MVC_Basics_2509AB`;
+-- Gebruik database
+USE `php-of-jap`;
 
 -- Step: 02
 -- *********************************************************************************
