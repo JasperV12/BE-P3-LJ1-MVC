@@ -4,7 +4,7 @@
 -- *********************************************************************************
 -- Versie       Datum           Auteur              Omschrijving
 -- ******       *****           ******              ************
--- 01           10-02-2026      VerhoefJ            Smartphones
+-- 01           24-02-2026      VerhoefJ            Smartphones
 -- *********************************************************************************
 
 -- Verwijder database
@@ -22,7 +22,7 @@ USE `php-of-jap`;
 -- *********************************************************************************
 -- Versie       Datum           Auteur              Omschrijving
 -- ******       *****           ******              ************
--- 01           10-02-2026      VerhoefJ            Tabel Smartphones
+-- 01           24-02-2026      VerhoefJ            Tabel Smartphones
 -- *********************************************************************************
 -- Onderstaande velden toevoegen aan de tabel Smartphones
 -- Merk, Model, Prijs, Geheugen, Besturingssysteem,
@@ -44,7 +44,7 @@ CREATE TABLE Smartphones
    ,Opmerking           VARCHAR(255)                    NULL    DEFAULT NULL
    ,DatumAangemaakt     DATETIME(6)                 NOT NULL    DEFAULT NOW(6)
    ,DatumGewijzigd      DATETIME(6)                 NOT NULL    DEFAULT NOW(6)
-   ,CONSTRAINT          PK_Sneakers_Id              PRIMARY KEY     (Id)
+   ,CONSTRAINT          PK_Smartphones_Id           PRIMARY KEY (Id)
 ) ENGINE=InnoDB;
 
 -- Step: 03
@@ -53,7 +53,7 @@ CREATE TABLE Smartphones
 -- *********************************************************************************
 -- Versie       Datum           Auteur              Omschrijving
 -- ******       *****           ******              ************
--- 01           10-02-2026      VerhoefJ            Vulling Smartphones
+-- 01           24-02-2026      VerhoefJ            Vulling Smartphones
 -- *********************************************************************************
 
 INSERT INTO Smartphones
@@ -83,7 +83,7 @@ VALUES
 -- *********************************************************************************
 -- Versie       Datum           Auteur              Omschrijving
 -- ******       *****           ******              ************
--- 01           10-02-2026      VerhoefJ            Tabel Sneakers
+-- 01           24-02-2026      VerhoefJ            Tabel Sneakers
 -- *********************************************************************************
 -- Onderstaande velden toevoegen aan de tabel Sneakers
 -- Type (Hardloop, Basketbal, Casual), Prijs, Materiaal (Leer, Mesh, Synthetisch), Gewicht, Releasedatum
@@ -126,3 +126,57 @@ VALUES
 ('Puma', 'Suede Classic', 'Casual'),
 ('Asics', 'Gel-Kayano 30', 'Hardloop'),
 ('Reebok', 'Club C 85', 'Casual');
+
+-- Step: 06
+-- *********************************************************************************
+-- Doel : Maak een nieuwe tabel aan met de naam Horloges
+-- *********************************************************************************
+-- Versie       Datum           Auteur              Omschrijving
+-- ******       *****           ******              ************
+-- 01           10-03-2026      VerhoefJ            Tabel Horloges
+-- *********************************************************************************
+-- Onderstaande velden toevoegen aan de tabel Horloges
+-- Merk, Model, Type, Prijs, Materiaal, Gewicht, Releasedatum
+-- *********************************************************************************
+
+CREATE TABLE Horloges
+(
+    Id                  SMALLINT        UNSIGNED    NOT NULL    AUTO_INCREMENT
+   ,Merk                VARCHAR(50)                 NOT NULL
+   ,Model               VARCHAR(50)                 NOT NULL
+   ,Type                VARCHAR(25)                 NOT NULL
+   ,Prijs               DECIMAL(10, 2)              NOT NULL
+   ,Materiaal           VARCHAR(50)                 NOT NULL
+   ,Gewicht             DECIMAL(5, 2)               NOT NULL
+   ,Releasedatum        DATE                        NOT NULL
+   ,CONSTRAINT          PK_Horloges_Id              PRIMARY KEY     (Id)
+) ENGINE=InnoDB;
+
+-- Step: 07
+-- *********************************************************************************
+-- Doel : Vul de tabel Horloges met gegevens
+-- *********************************************************************************
+-- Versie       Datum           Auteur              Omschrijving
+-- ******       *****           ******              ************
+-- 01           10-03-2026      VerhoefJ            Vulling Horloges
+-- *********************************************************************************
+
+INSERT INTO Horloges
+(
+    Merk
+   ,Model
+   ,Type
+   ,Prijs
+   ,Materiaal
+   ,Gewicht
+   ,Releasedatum
+)
+VALUES
+('Rolex', 'Submariner', 'Dress', 10000.00, 'Staal', 150.00, '2023-01-01'),
+('Omega', 'Speedmaster', 'Sport', 5000.00, 'Staal', 120.00, '2023-02-01'),
+('Tag Heuer', 'Carrera', 'Sport', 3000.00, 'Staal', 130.00, '2023-03-01'),
+('Seiko', 'Prospex', 'Sport', 800.00, 'Staal', 110.00, '2023-04-01'),
+('Citizen', 'Eco-Drive', 'Casual', 200.00, 'Staal', 100.00, '2023-05-01'),
+('Casio', 'G-Shock', 'Sport', 150.00, 'Kunststof', 90.00, '2023-06-01'),
+('Fossil', 'Gen 5E', 'Casual', 250.00, 'Staal', 80.00, '2023-07-01'),
+('Garmin', 'Fenix 6 Pro', 'Sport', 600.00, 'Staal', 140.00, '2023-08-01');

@@ -6,21 +6,32 @@ class SneakerController extends BaseController
 
     public function __construct()
     {
-        // Laad de Sneaker model in
         $this->sneakerModel = $this->model('Sneaker');
     }
 
-    public function index()
+    // Parameters display en message toegevoegd
+    public function index($display = 'none', $message = '')
     {
-        // Haal de data op via de model
         $result = $this->sneakerModel->getAllSneakers();
 
         $data = [
             'title' => 'Overzicht Sneakers',
+            'display' => $display,
+            'message' => $message,
             'result' => $result
         ];
 
-        // Stuur de data naar de view
         $this->view('sneaker/index', $data);
+    }
+
+    // Nieuwe delete functie
+    public function delete($Id)
+    {
+        $result = $this->sneakerModel->delete($Id);
+
+        // Stuur door naar sneaker index
+        header('Refresh:3; url=' . URLROOT . '/SneakerController/index');
+
+        $this->index('flex', 'Sneaker is verwijderd');
     }
 }
