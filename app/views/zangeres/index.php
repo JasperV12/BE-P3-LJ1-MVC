@@ -9,7 +9,7 @@
 
     <div class="row mt-3 d-flex justify-content-center">
         <div class="col-10 text-begin">
-            <a href="<?= URLROOT; ?>/HorlogeController/create" class="btn btn-warning" role="button">Nieuw horloge</a>
+            <a href="<?= URLROOT; ?>/ZangeresController/create" class="btn btn-warning" role="button">Nieuwe zangeres</a>
         </div>
     </div>
 
@@ -26,36 +26,36 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Merk</th>
-                        <th>Model</th>
-                        <th>Type</th>
-                        <th>Prijs</th>
-                        <th>Materiaal</th>
-                        <th>Gewicht</th>
-                        <th>Releasedatum</th>
+                        <th>Voornaam</th>
+                        <th>Achternaam</th>
+                        <th>Land</th>
+                        <th>Genre</th>
+                        <th>Grammy Awards</th>
+                        <th>Vermogen</th>
+                        <th>Geboortedatum</th>
                         <th>Wijzig</th>
                         <th>Verwijder</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if(is_array($data['result']) && count($data['result']) > 0) : ?>
-                        <?php foreach($data['result'] as $horloge) : ?>
+                        <?php foreach($data['result'] as $zangeres) : ?>
                             <tr>
-                                <td><?= $horloge->Merk; ?></td>
-                                <td><?= $horloge->Model; ?></td>
-                                <td><?= $horloge->Type; ?></td>
-                                <td>&euro; <?= $horloge->Prijs; ?></td>
-                                <td><?= $horloge->Materiaal; ?></td>
-                                <td><?= $horloge->Gewicht; ?></td>
-                                <td><?= $horloge->Releasedatum; ?></td>
+                                <td><?= $zangeres->Voornaam; ?></td>
+                                <td><?= $zangeres->Achternaam; ?></td>
+                                <td><?= $zangeres->Land; ?></td>
+                                <td><?= $zangeres->Genre; ?></td>
+                                <td><?= $zangeres->Grammyawards; ?></td>
+                                <td><?= $zangeres->Vermogen; ?></td>
+                                <td><?= $zangeres->Geboortedatum; ?></td>
                                 <td class="text-center">
-                                    <a href="<?= URLROOT; ?>/HorlogeController/update/<?= $horloge->Id; ?>">
+                                    <a href="<?= URLROOT; ?>/ZangeresController/update/<?= $zangeres->Id; ?>">
                                         <i class="bi bi-pencil-fill text-success"></i>
                                     </a>
                                 </td>
                                 <td class="text-center">
-                                    <a href="<?= URLROOT; ?>/HorlogeController/delete/<?= $horloge->Id; ?>" 
-                                       onclick="return confirm('Weet je zeker dat je dit horloge wilt verwijderen?');">
+                                    <a href="<?= URLROOT; ?>/ZangeresController/delete/<?= $zangeres->Id; ?>" 
+                                       onclick="return confirm('Weet je zeker dat je dit record wilt verwijderen?');">
                                        <i class="bi bi-trash3-fill text-danger"></i>
                                     </a>
                                 </td>
@@ -63,7 +63,7 @@
                         <?php endforeach; ?>
                     <?php else : ?>
                         <tr>
-                            <td colspan="9" class="text-center">Geen horloges gevonden in de database.</td>
+                            <td colspan="9" class="text-center">Geen zangeressen gevonden in de database.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

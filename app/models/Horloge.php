@@ -54,4 +54,48 @@ class Horloge
 
         return $this->db->execute();
     }
+
+    public function getHorlogeById($id)
+    {
+        $sql = 'SELECT Id
+                      ,Merk
+                      ,Model
+                      ,Type
+                      ,Prijs
+                      ,Materiaal
+                      ,Gewicht
+                      ,Releasedatum
+                FROM Horloges
+                WHERE Id = :id';
+
+        $this->db->query($sql);
+        $this->db->bind(':id', $id, PDO::PARAM_INT);
+
+        return $this->db->single();
+    }
+
+    public function updateHorloge($request)
+    {
+        $sql = 'UPDATE Horloges
+                SET    Merk = :merk
+                      ,Model = :model
+                      ,Type = :type
+                      ,Prijs = :prijs
+                      ,Materiaal = :materiaal
+                      ,Gewicht = :gewicht
+                      ,Releasedatum = :releasedatum
+                WHERE Id = :id';
+
+        $this->db->query($sql);
+        $this->db->bind(':id', $request['id'], PDO::PARAM_INT);
+        $this->db->bind(':merk', $request['merk'], PDO::PARAM_STR);
+        $this->db->bind(':model', $request['model'], PDO::PARAM_STR);
+        $this->db->bind(':type', $request['type'], PDO::PARAM_STR);
+        $this->db->bind(':prijs', $request['prijs'], PDO::PARAM_STR);
+        $this->db->bind(':materiaal', $request['materiaal'], PDO::PARAM_STR);
+        $this->db->bind(':gewicht', $request['gewicht'], PDO::PARAM_INT);
+        $this->db->bind(':releasedatum', $request['releasedatum'], PDO::PARAM_STR);
+
+        return $this->db->execute();
+    }
 }

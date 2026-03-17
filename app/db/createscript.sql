@@ -180,3 +180,61 @@ VALUES
 ('Casio', 'G-Shock', 'Sport', 150.00, 'Kunststof', 90.00, '2023-06-01'),
 ('Fossil', 'Gen 5E', 'Casual', 250.00, 'Staal', 80.00, '2023-07-01'),
 ('Garmin', 'Fenix 6 Pro', 'Sport', 600.00, 'Staal', 140.00, '2023-08-01');
+
+-- Step: 08
+-- *********************************************************************************
+-- Doel : Maak een nieuwe tabel aan met de naam Zangeressen
+-- *********************************************************************************
+-- Versie       Datum           Auteur              Omschrijving
+-- ******       *****           ******              ************
+-- 01           17-03-2026      VerhoefJ            Tabel Zangeressen
+-- *********************************************************************************
+-- Onderstaande velden toevoegen aan de tabel Zangeressen
+-- Voornaam, Achternaam, Land, Genre, Grammyawards, Vermogen, Geboortedatum
+-- *********************************************************************************
+
+CREATE TABLE Zangeressen
+(
+    Id                  SMALLINT        UNSIGNED    NOT NULL    AUTO_INCREMENT
+   ,Voornaam            VARCHAR(50)                 NOT NULL
+   ,Achternaam          VARCHAR(50)                 NOT NULL
+   ,Land                VARCHAR(50)                 NOT NULL
+   ,Genre               VARCHAR(50)                 NOT NULL
+   ,Grammyawards        SMALLINT                    NOT NULL    DEFAULT 0
+   ,Vermogen            DECIMAL(15,2)               NOT NULL
+   ,Geboortedatum       DATE                        NOT NULL
+   ,IsActief            BIT                         NOT NULL    DEFAULT 1
+   ,Opmerking           VARCHAR(255)                    NULL    DEFAULT NULL
+   ,DatumAangemaakt     DATETIME(6)                 NOT NULL    DEFAULT NOW(6)
+   ,DatumGewijzigd      DATETIME(6)                 NOT NULL    DEFAULT NOW(6)
+   ,CONSTRAINT          PK_Zangeressen_Id           PRIMARY KEY (Id)
+) ENGINE=InnoDB;
+
+-- Step: 09
+-- *********************************************************************************
+-- Doel : Vul de tabel Zangeressen met gegevens
+-- *********************************************************************************
+-- Versie       Datum           Auteur              Omschrijving
+-- ******       *****           ******              ************
+-- 01           17-03-2026      VerhoefJ            Vulling Zangeressen
+-- *********************************************************************************
+
+INSERT INTO Zangeressen
+(
+    Voornaam
+   ,Achternaam
+   ,Land
+   ,Genre
+   ,Grammyawards
+   ,Vermogen
+   ,Geboortedatum
+)
+VALUES
+('Rihanna', 'Fenty', 'Barbados', 'pop', 9, 1400000000.00, '1988-02-20'),
+('Beyoncé', 'Knowles-Carter', 'Verenigde Staten', 'pop', 32, 540000000.00, '1981-09-04'),
+('Taylor', 'Swift', 'Verenigde Staten', 'pop', 12, 400000000.00, '1989-12-13'),
+('Lady', 'Gaga', 'Verenigde Staten', 'pop', 13, 320000000.00, '1986-03-28'),
+('Adele', 'Adkins', 'Verenigd Koninkrijk', 'pop', 16, 220000000.00, '1988-05-05'),
+('Dua', 'Lipa', 'Macedonië', 'pop', 10, 35000000.00, '1995-08-22'),
+('Ariana', 'Grande', 'Verenigde Staten', 'pop', 2, 30000000.00, '1993-06-26'),
+('Billie', 'Eilish', 'Verenigde Staten', 'pop', 7, 30000000.00, '2001-12-18');

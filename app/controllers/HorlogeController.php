@@ -55,4 +55,40 @@ class HorlogeController extends BaseController
 
         $this->view('horloge/create', $data);
     }
+
+    public function update($id = NULL)
+    {
+        $data = [
+            'title' => 'Wijzig horloge',
+            'display' => 'none',
+            'message' => '',
+            'color' => ''
+        ];
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (empty($_POST['merk']) ||
+                empty($_POST['model']) ||
+                empty($_POST['type']) ||
+                empty($_POST['prijs']) ||
+                empty($_POST['materiaal']) ||
+                empty($_POST['gewicht']) ||
+                empty($_POST['releasedatum'])) {
+
+                $data['display'] = 'flex';
+                $data['message'] = 'Vul alle velden in';
+                $data['color'] = 'danger';
+            } else {
+                $result = $this->horlogeModel->updateHorloge($_POST);
+
+                $data['display'] = 'flex';
+                $data['message'] = 'Het record is succesvol opgeslagen';
+                $data['color'] = 'success';
+                header("Refresh:3; url=" . URLROOT . "/HorlogeController/index");
+            }
+        }
+
+        $data['horloge'] = $this->horlogeModel->getHorlogeById($id);
+
+        $this->view('horloge/update', $data);
+    }
 }
