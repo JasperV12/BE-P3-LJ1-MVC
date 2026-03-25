@@ -35,18 +35,33 @@ class SneakerController extends BaseController
         $data = [
             'title' => 'Nieuwe sneaker toevoegen',
             'display' => 'none',
-            'message' => ''
+            'message' => '',
+            'errors' => []
         ];
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if (empty($_POST['merk']) || empty($_POST['model']) || empty($_POST['type'])) {
-                $data['display'] = 'flex';
-                $data['message'] = 'Vul alle velden in';
-            } else {
+            if (empty($_POST['merk'])) {
+                $data['errors']['merk'] = 'Voor een merk in';
+            }
+
+            if (empty($_POST['model'])) {
+                $data['errors']['model'] = 'Voor een model in';
+            }
+
+            if (empty($_POST['type'])) {
+                $data['errors']['type'] = 'Voor een type in';
+            }
+
+            if (empty($data['errors'])) {
                 $this->sneakerModel->create($_POST);
                 $data['display'] = 'flex';
                 $data['message'] = 'De gegevens zijn opgeslagen';
+                $data['color'] = 'success';
                 header('Refresh: 3; URL=' . URLROOT . '/SneakerController/index');
+            } else {
+                $data['display'] = 'flex';
+                $data['message'] = 'Controleer de invoer en verbeter de gemarkeerde velden.';
+                $data['color'] = 'danger';
             }
         }
 
@@ -59,25 +74,37 @@ class SneakerController extends BaseController
             'title' => 'Wijzig sneaker',
             'display' => 'none',
             'message' => '',
-            'color' => ''
+            'color' => 'success',
+            'errors' => []
         ];
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if (empty($_POST['merk']) || empty($_POST['model']) || empty($_POST['type'])) {
-                $data['display'] = 'flex';
-                $data['message'] = 'Vul alle velden in';
-                $data['color'] = 'danger';
-            } else {
-                $result = $this->sneakerModel->updateSneaker($_POST);
+        $data['sneaker'] = $this->sneakerModel->getSneakerById($id);
 
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (empty($_POST['merk'])) {
+                $data['errors']['merk'] = 'Voor een merk in';
+            }
+
+            if (empty($_POST['model'])) {
+                $data['errors']['model'] = 'Voor een model in';
+            }
+
+            if (empty($_POST['type'])) {
+                $data['errors']['type'] = 'Voor een type in';
+            }
+
+            if (empty($data['errors'])) {
+                $this->sneakerModel->updateSneaker($_POST);
                 $data['display'] = 'flex';
                 $data['message'] = 'Het record is succesvol opgeslagen';
                 $data['color'] = 'success';
-                header("Refresh:3; url=" . URLROOT . "/SneakerController/index");
+                header('Refresh: 3; url=' . URLROOT . '/SneakerController/index');
+            } else {
+                $data['display'] = 'flex';
+                $data['message'] = 'Controleer de invoer en verbeter de gemarkeerde velden.';
+                $data['color'] = 'danger';
             }
         }
-
-        $data['sneaker'] = $this->sneakerModel->getSneakerById($id);
 
         $this->view('sneaker/update', $data);
     }

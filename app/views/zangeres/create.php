@@ -8,8 +8,8 @@
     </div>
 
     <div class="row mt-3 d-<?= $data['display']; ?> justify-content-center">
-        <div class="col-6 text-begin text-primary">
-            <div class="alert alert-success" role="alert">
+        <div class="col-6 text-begin text-<?= isset($data['color']) ? $data['color'] : 'success'; ?>">
+            <div class="alert alert-<?= isset($data['color']) ? $data['color'] : 'success'; ?>" role="alert">
                 <?= $data['message']; ?>
             </div>
         </div>
@@ -19,32 +19,39 @@
         <div class="col-6">
             <form action="<?= URLROOT; ?>/ZangeresController/create" method="post">
                 <div class="mb-3">
-                    <label for="voornaam" class="form-label">Voornaam</label>
-                    <input name="voornaam" type="text" class="form-control" id="voornaam" required>
-                </div>
-                <div class="mb-3">
-                    <label for="achternaam" class="form-label">Achternaam</label>
-                    <input name="achternaam" type="text" class="form-control" id="achternaam" required>
-                </div>
-                <div class="mb-3">
-                    <label for="land" class="form-label">Land</label>
-                    <input name="land" type="text" class="form-control" id="land" required>
+                    <label for="naam" class="form-label">Naam</label>
+                    <input name="naam" type="text" class="form-control <?php if (isset($data['errors']['naam'])): ?>is-invalid<?php endif; ?>" id="naam" value="<?= $_POST['naam'] ?? ''; ?>">
+                    <?php if (isset($data['errors']['naam'])): ?>
+                        <div class="invalid-feedback"><?= $data['errors']['naam']; ?></div>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
                     <label for="genre" class="form-label">Genre</label>
-                    <input name="genre" type="text" class="form-control" id="genre" required>
+                    <input name="genre" type="text" class="form-control <?php if (isset($data['errors']['genre'])): ?>is-invalid<?php endif; ?>" id="genre" value="<?= $_POST['genre'] ?? ''; ?>">
+                    <?php if (isset($data['errors']['genre'])): ?>
+                        <div class="invalid-feedback"><?= $data['errors']['genre']; ?></div>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
-                    <label for="grammyawards" class="form-label">Grammy Awards</label>
-                    <input name="grammyawards" type="number" min="0" class="form-control" id="grammyawards" required>
+                    <label for="land" class="form-label">Land</label>
+                    <input name="land" type="text" class="form-control <?php if (isset($data['errors']['land'])): ?>is-invalid<?php endif; ?>" id="land" value="<?= $_POST['land'] ?? ''; ?>">
+                    <?php if (isset($data['errors']['land'])): ?>
+                        <div class="invalid-feedback"><?= $data['errors']['land']; ?></div>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
-                    <label for="vermogen" class="form-label">Vermogen (€)</label>
-                    <input name="vermogen" type="number" min="0" step="0.01" class="form-control" id="vermogen" required>
+                    <label for="leeftijd" class="form-label">Leeftijd</label>
+                    <input name="leeftijd" type="number" class="form-control <?php if (isset($data['errors']['leeftijd'])): ?>is-invalid<?php endif; ?>" id="leeftijd" value="<?= $_POST['leeftijd'] ?? ''; ?>">
+                    <?php if (isset($data['errors']['leeftijd'])): ?>
+                        <div class="invalid-feedback"><?= $data['errors']['leeftijd']; ?></div>
+                    <?php endif; ?>
                 </div>
                 <div class="mb-3">
-                    <label for="geboortedatum" class="form-label">Geboortedatum</label>
-                    <input name="geboortedatum" type="date" class="form-control" id="geboortedatum" required>
+                    <label for="vermogen" class="form-label">Vermogen (in euro's)</label>
+                    <input name="vermogen" type="number" step="0.01" class="form-control <?php if (isset($data['errors']['vermogen'])): ?>is-invalid<?php endif; ?>" id="vermogen" value="<?= $_POST['vermogen'] ?? ''; ?>">
+                    <?php if (isset($data['errors']['vermogen'])): ?>
+                        <div class="invalid-feedback"><?= $data['errors']['vermogen']; ?></div>
+                    <?php endif; ?>
                 </div>
                 <button type="submit" class="btn btn-primary">Verstuur</button>
             </form>
