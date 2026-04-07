@@ -12,13 +12,11 @@ class Zangeres
     public function getAllZangeressen()
     {
         $sql = 'SELECT  z.Id
-                       ,z.Voornaam
-                       ,z.Achternaam
-                       ,z.Land
+                       ,CONCAT(z.Voornaam, " ", z.Achternaam) AS Naam
                        ,z.Genre
-                       ,z.Grammyawards
-                       ,CONCAT("€ ", FORMAT(z.Vermogen, 0)) as Vermogen
-                       ,DATE_FORMAT(z.Geboortedatum, "%d/%m/%Y") as Geboortedatum
+                       ,z.Land
+                       ,TIMESTAMPDIFF(YEAR, z.Geboortedatum, CURDATE()) AS Leeftijd
+                       ,CONCAT("€ ", FORMAT(z.Vermogen, 0)) AS VermogenFormatted
                 
                 FROM   Zangeressen z
 
@@ -60,11 +58,13 @@ class Zangeres
         $sql = 'SELECT Id
                       ,Voornaam
                       ,Achternaam
+                      ,CONCAT(Voornaam, " ", Achternaam) AS Naam
                       ,Land
                       ,Genre
                       ,Grammyawards
                       ,Vermogen
                       ,Geboortedatum
+                      ,TIMESTAMPDIFF(YEAR, Geboortedatum, CURDATE()) AS Leeftijd
                 FROM Zangeressen
                 WHERE Id = :id';
 

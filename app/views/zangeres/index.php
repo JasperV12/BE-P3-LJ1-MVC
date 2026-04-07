@@ -9,7 +9,7 @@
 
     <div class="row mt-3 d-flex justify-content-center">
         <div class="col-10 text-begin">
-            <a href="<?= URLROOT; ?>/ZangeresController/create" class="btn btn-warning" role="button">Nieuwe zangeres</a>
+            <a href="<?= URLROOT; ?>/ZangeresController/create" class="btn btn-danger" role="button"><i class="bi bi-plus-circle"></i> Nieuwe zangeres</a>
         </div>
     </div>
 
@@ -26,50 +26,40 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Voornaam</th>
-                        <th>Achternaam</th>
-                        <th>Land</th>
+                        <th>Naam</th>
                         <th>Genre</th>
-                        <th>Grammy Awards</th>
+                        <th>Land</th>
+                        <th>Leeftijd</th>
                         <th>Vermogen</th>
-                        <th>Geboortedatum</th>
                         <th>Wijzig</th>
                         <th>Verwijder</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if(is_array($data['result']) && count($data['result']) > 0) : ?>
-                        <?php foreach($data['result'] as $zangeres) : ?>
-                            <tr>
-                                <td><?= $zangeres->Voornaam; ?></td>
-                                <td><?= $zangeres->Achternaam; ?></td>
-                                <td><?= $zangeres->Land; ?></td>
-                                <td><?= $zangeres->Genre; ?></td>
-                                <td><?= $zangeres->Grammyawards; ?></td>
-                                <td><?= $zangeres->Vermogen; ?></td>
-                                <td><?= $zangeres->Geboortedatum; ?></td>
-                                <td class="text-center">
-                                    <a href="<?= URLROOT; ?>/ZangeresController/update/<?= $zangeres->Id; ?>">
-                                        <i class="bi bi-pencil-fill text-success"></i>
-                                    </a>
-                                </td>
-                                <td class="text-center">
-                                    <a href="<?= URLROOT; ?>/ZangeresController/delete/<?= $zangeres->Id; ?>" 
-                                       onclick="return confirm('Weet je zeker dat je dit record wilt verwijderen?');">
-                                       <i class="bi bi-trash3-fill text-danger"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else : ?>
+                    <?php foreach($data['result'] as $zangeres) : ?>
                         <tr>
-                            <td colspan="9" class="text-center">Geen zangeressen gevonden in de database.</td>
+                            <td><?= $zangeres->Naam; ?></td>
+                            <td><?= $zangeres->Genre; ?></td>
+                            <td><?= $zangeres->Land; ?></td>
+                            <td><?= $zangeres->Leeftijd; ?></td>
+                            <td><?= $zangeres->VermogenFormatted; ?></td>
+                            <td class="text-center">
+                                <a href="<?= URLROOT; ?>/ZangeresController/update/<?= $zangeres->Id; ?>">
+                                    <i class="bi bi-pencil-fill text-success"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="<?= URLROOT; ?>/ZangeresController/delete/<?= $zangeres->Id; ?>" 
+                                   onclick="return confirm('Weet je zeker dat je dit record wilt verwijderen?');">
+                                   <i class="bi bi-trash3-fill text-danger"></i>
+                                </a>
+                            </td>
                         </tr>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
             
-            <a href="<?= URLROOT; ?>/homepages/index"><i class="bi bi-arrow-left"></i> Terug</a>
+            <a href="<?= URLROOT; ?>/homepages/index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Terug naar homepage</a>
         </div>
     </div>
 </div>

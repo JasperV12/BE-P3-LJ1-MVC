@@ -9,6 +9,40 @@ class ZangeresController extends BaseController
         $this->zangeresModel = $this->model('Zangeres');
     }
 
+    private function parseNaam(string $naam): array
+    {
+        $parts = preg_split('/\s+/', trim($naam));
+        $voornaam = array_shift($parts) ?: '';
+        $achternaam = count($parts) ? implode(' ', $parts) : '';
+
+        return [
+            'voornaam' => $voornaam,
+            'achternaam' => $achternaam
+        ];
+    }
+
+    private function leeftijdNaarGeboortedatum($leeftijd): string
+    {
+        $leeftijd = filter_var($leeftijd, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]) ?: 0;
+        $year = (int) date('Y') - $leeftijd;
+        return sprintf('%04d-01-01', $year);
+    }
+
+    private function prepareZangeresData(array $post): array
+    {
+        $nameParts = $this->parseNaam($post['naam'] ?? '');
+
+        return [
+            'voornaam' => $nameParts['voornaam'],
+            'achternaam' => $nameParts['achternaam'],
+            'land' => $post['land'] ?? '',
+            'genre' => $post['genre'] ?? '',
+            'grammyawards' => 0,
+            'vermogen' => $post['vermogen'] ?? 0,
+            'geboortedatum' => $this->leeftijdNaarGeboortedatum($post['leeftijd'] ?? 0)
+        ];
+    }
+
     public function index($display = 'none', $message = '')
     {
         $result = $this->zangeresModel->getAllZangeressen();
@@ -52,7 +86,7 @@ class ZangeresController extends BaseController
                 $data['errors']['land'] = 'Voor een land in';
             }
 
-            if (empty($_POST['leeftijd'])) {
+            if (!isset($_POST['leeftijd']) || $_POST['leeftijd'] === '') {
                 $data['errors']['leeftijd'] = 'Voor een leeftijd in';
             }
 
@@ -61,7 +95,8 @@ class ZangeresController extends BaseController
             }
 
             if (empty($data['errors'])) {
-                $this->zangeresModel->create($_POST);
+                $input = $this->prepareZangeresData($_POST);
+                $this->zangeresModel->create($input);
                 $data['display'] = 'flex';
                 $data['message'] = 'De gegevens zijn opgeslagen';
                 $data['color'] = 'success';
@@ -101,7 +136,7 @@ class ZangeresController extends BaseController
                 $data['errors']['land'] = 'Voor een land in';
             }
 
-            if (empty($_POST['leeftijd'])) {
+            if (!isset($_POST['leeftijd']) || $_POST['leeftijd'] === '') {
                 $data['errors']['leeftijd'] = 'Voor een leeftijd in';
             }
 
@@ -110,7 +145,9 @@ class ZangeresController extends BaseController
             }
 
             if (empty($data['errors'])) {
-                $this->zangeresModel->updateZangeres($_POST);
+                $input = $this->prepareZangeresData($_POST);
+                $input['id'] = $_POST['id'];
+                $this->zangeresModel->updateZangeres($input);
                 $data['display'] = 'flex';
                 $data['message'] = 'Het record is succesvol opgeslagen';
                 $data['color'] = 'success';

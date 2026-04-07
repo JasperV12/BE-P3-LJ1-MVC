@@ -9,7 +9,7 @@
 
     <div class="row mt-3 d-flex justify-content-center">
         <div class="col-10 text-begin">
-            <a href="<?= URLROOT; ?>/SmartphoneController/create" class="btn btn-warning" role="button">Nieuwe smartphone</a>
+            <a href="<?= URLROOT; ?>/SmartphoneController/create" class="btn btn-warning" role="button"><i class="bi bi-plus-circle"></i> Nieuwe smartphone</a>
         </div>
     </div>
 
@@ -56,8 +56,8 @@
                             </td>
                             <td class="text-center">
                                 <a href="<?= URLROOT; ?>/SmartphoneController/delete/<?= $smartphone->Id; ?>" 
-                                onclick="return confirm('Weet je zeker dat je dit record wilt verwijderen?');">
-                                    <i class="bi bi-trash3-fill text-danger"></i>
+                                   onclick="return confirm('Weet je zeker dat je dit record wilt verwijderen?');">
+                                   <i class="bi bi-trash3-fill text-danger"></i>
                                 </a>
                             </td>
                         </tr>
@@ -65,7 +65,7 @@
                 </tbody>
             </table>
             
-            <a href="<?= URLROOT; ?>/homepages/index"><i class="bi bi-arrow-left"></i> Terug</a>
+            <a href="<?= URLROOT; ?>/homepages/index" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Terug naar homepage</a>
         </div>
     </div>
 </div>
